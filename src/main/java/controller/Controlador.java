@@ -39,13 +39,15 @@ public class Controlador implements ActionListener {
 
     //Atributos
     private ArrayList<String> contraseñas = new ArrayList<String>();
-     private ArrayList<String> tecladoCombinacionTemp;
+    private ArrayList<String> tecladoCombinacionTemp;
     private ArrayList<String> tecladoCombinacion1 = new ArrayList<String>();
     private ArrayList<String> tecladoCombinacion2 = new ArrayList<String>();
     private ArrayList<String> tecladoCombinacion3 = new ArrayList<String>();
     private ArrayList<String> tecladoCombinacion4 = new ArrayList<String>();
     private ArrayList<String> tecladoCombinacion5 = new ArrayList<String>();
     private ArrayList<String> tecladoCombinacion6 = new ArrayList<String>();
+    private String[][] matrizFrecuencias;
+    private String[][] matrizCodigoMorse;
     
     //Constructor
     public Controlador(VentanaPrincipal viewPrincipal, VentanaCables viewCables, VentanaContraseña viewContraseña, VentanaButton viewButton, VentanaCablesComplicados viewCablesComplicados, VentanaCodigoMorse viewCodigoMorse, VentanaLaberinto viewLaberinto, VentanaMemoria viewMemoria, VentanaPerilla viewPerilla, VentanaQuienVaPrimero viewQuienVaPrimero, VentanaSecuenciaDeCables viewSecuenciaDeCables, VentanaSimonDice viewSimonDice, VentanaTeclado viewTeclado) {
@@ -78,6 +80,7 @@ public class Controlador implements ActionListener {
         
         this.viewContraseña.jButton1.addActionListener(this);
         this.viewTeclado.btnOrdenar.addActionListener(this);
+        this.viewCodigoMorse.btnConvertir.addActionListener(this);
     }
 
     //Metodo que inicia la vista. 
@@ -169,6 +172,58 @@ public class Controlador implements ActionListener {
         tecladoCombinacion6.add("ψ");
         tecladoCombinacion6.add("Ҋ");
         tecladoCombinacion6.add("Ω");
+        
+        matrizCodigoMorse = new String[][]{
+            {"A", ".-"},
+            {"B", "-..."},
+            {"C", "-.-."},
+            {"D", "-.."},
+            {"E", "."},
+            {"F", "..-."},
+            {"G", "--."},
+            {"H", "...."},
+            {"I", ".."},
+            {"J", ".---"},
+            {"K", "-.-"},
+            {"L", ".-.."},
+            {"M", "--"},
+            {"N", "-."},
+            {"O", "---"},
+            {"P", ".--."},
+            {"Q", "--.-"},
+            {"R", ".-."},
+            {"S", "..."},
+            {"T", "-"},
+            {"U", "..-"},
+            {"V", "...-"},
+            {"W", ".--"},
+            {"X", "-..-"},
+            {"Y", "-.--"},
+            {"Z", "--.."},
+            {"Á", ".--.-"},
+            {"É", "..-.."},
+            {"Ñ", "--.--"},
+            {"Ó", "---."}
+        };
+        
+        matrizFrecuencias = new String[][]{
+            {"freno", "3.505 MHz"},
+            {"hongos", "3.515 MHz"},
+            {"lentes", "3.522 MHz"},
+            {"biela", "3.532 MHz"},
+            {"resta", "3.535 MHz"},
+            {"trato", "3.542 MHz"},
+            {"volar", "3.545 MHz"},
+            {"vuelta", "3.552 MHz"},
+            {"llaves", "3.555 MHz"},
+            {"tabla", "3.565 MHz"},
+            {"tronco", "3.572 MHz"},
+            {"bomba", "3.575 MHz"},
+            {"santos", "3.582 MHz"},
+            {"senso", "3.592 MHz"},
+            {"ratas", "3.595 MHz"},
+            {"trenes", "3.600 MHz"}
+        };
     }
     
     //Función que realizan los botones. 
@@ -468,6 +523,71 @@ public class Controlador implements ActionListener {
                 showMessageDialog(null, "Error: " + x.getMessage());
             }
             
+        }
+        
+        if (e.getSource() == viewCodigoMorse.btnConvertir ) {
+            
+            String codigoMorse = "";
+            String frecuencia = "";
+            boolean encontrado = false;
+            
+            try {
+                codigoMorse = viewCodigoMorse.jtfMorse.getText();
+
+                if (codigoMorse.matches("[\\-\\.\\s]+")) {
+                    String[] partes = codigoMorse.split("[\\s]+");
+
+                    ArrayList<String> resultados = new ArrayList<>();
+
+                    for (String parte : partes) {
+                        if (parte.matches("[\\-\\.]+")) {
+                            resultados.add(parte);
+                        }
+                    }
+
+                    String[] resultadoFinal = resultados.toArray(new String[0]);
+
+                    String[] palabrasMorse = resultadoFinal; // Separa el resultadoFinal en un array de palabras Morse
+                    StringBuilder palabra = new StringBuilder(); // Inicializa un StringBuilder para construir la palabra a partir de las palabras Morse
+
+                    // Itera por cada palabra Morse y busca su correspondencia en la matriz de código Morse
+                    for (String palabraMorse : palabrasMorse) {
+                        for (String[] fila : matrizCodigoMorse) {
+                            if (palabraMorse.equals(fila[1])) { // Si la palabra Morse coincide con la fila de la matriz de código Morse, agrega la letra correspondiente al StringBuilder
+                                palabra.append(fila[0]);
+                                break; // Sal del bucle interno para pasar a la siguiente palabra Morse
+                            }
+                        }
+                    }
+
+                    String palabraEnMinusculas = palabra.toString().toLowerCase();
+                    for (String[] fila : matrizFrecuencias) {
+                        String palabraFrecuencia = fila[0].toLowerCase();
+                        String primerasDosLetras = palabraEnMinusculas.substring(0, 2);
+                        String primerasTresLetras;
+
+                        
+                        if (palabraFrecuencia.startsWith(primerasDosLetras)) {
+                            frecuencia = fila[1];
+                            break;
+                        } else 
+                            primerasTresLetras = palabraEnMinusculas.substring(0, 3);
+                            if (palabraFrecuencia.startsWith(primerasTresLetras)) {
+                            frecuencia = fila[1];
+                            break;
+                        }
+                    }
+
+                    viewCodigoMorse.jlbPalabra.setText("La palabra es: " + palabra);
+                    viewCodigoMorse.jlbFrecuencia.setText("Frecuencia: " + frecuencia);
+
+                } else {
+                    showMessageDialog(null, "El String contiene otros caracteres además de '-' o '.' o ' '");
+                }
+
+            } catch (Exception x) {
+                showMessageDialog(null, "Error: " + x.getMessage());
+            }
         }
     }    
 }

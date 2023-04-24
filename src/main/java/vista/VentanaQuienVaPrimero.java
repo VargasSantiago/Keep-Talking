@@ -15,6 +15,8 @@ public class VentanaQuienVaPrimero extends javax.swing.JFrame {
      */
     public VentanaQuienVaPrimero() {
         initComponents();
+        taResultadoSegundaPalabra.setLineWrap(true);
+        taResultadoSegundaPalabra.setWrapStyleWord(true);
     }
 
     /**
@@ -26,27 +28,108 @@ public class VentanaQuienVaPrimero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lbPalabras = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        tfPrimerPalabra = new javax.swing.JTextField();
+        tfSegundaPalabra = new javax.swing.JTextField();
+        btnBuscarPrimerPalabra = new javax.swing.JButton();
+        btnBuscarSegundaPalabra = new javax.swing.JButton();
+        lbResultadoPrimerPalabra = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taResultadoSegundaPalabra = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        lbPalabras.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lbPalabras.setForeground(new java.awt.Color(255, 255, 255));
+        lbPalabras.setText("PALABRAS:");
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("QUIEN VA PRIMERO:");
+
+        tfPrimerPalabra.setForeground(new java.awt.Color(0, 0, 0));
+
+        tfSegundaPalabra.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnBuscarPrimerPalabra.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscarPrimerPalabra.setText("BUSCAR");
+
+        btnBuscarSegundaPalabra.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscarSegundaPalabra.setText("BUSCAR");
+
+        lbResultadoPrimerPalabra.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lbResultadoPrimerPalabra.setForeground(new java.awt.Color(255, 255, 255));
+        lbResultadoPrimerPalabra.setText("RESULTADO:");
+
+        taResultadoSegundaPalabra.setBackground(new java.awt.Color(255, 255, 255));
+        taResultadoSegundaPalabra.setColumns(20);
+        taResultadoSegundaPalabra.setForeground(new java.awt.Color(0, 0, 0));
+        taResultadoSegundaPalabra.setRows(5);
+        taResultadoSegundaPalabra.setAutoscrolls(false);
+        taResultadoSegundaPalabra.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        taResultadoSegundaPalabra.setEnabled(false);
+        taResultadoSegundaPalabra.setMaximumSize(new java.awt.Dimension(220, 80));
+        taResultadoSegundaPalabra.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setViewportView(taResultadoSegundaPalabra);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbResultadoPrimerPalabra)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfPrimerPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnBuscarPrimerPalabra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscarSegundaPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfSegundaPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbPalabras)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPrimerPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarPrimerPalabra))
+                .addGap(18, 18, 18)
+                .addComponent(lbResultadoPrimerPalabra)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSegundaPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarSegundaPalabra))
+                .addGap(18, 18, 18)
+                .addComponent(lbPalabras)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addContainerGap(263, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addContainerGap(266, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -88,6 +171,15 @@ public class VentanaQuienVaPrimero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnBuscarPrimerPalabra;
+    public javax.swing.JButton btnBuscarSegundaPalabra;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbPalabras;
+    public javax.swing.JLabel lbResultadoPrimerPalabra;
+    public javax.swing.JTextArea taResultadoSegundaPalabra;
+    public javax.swing.JTextField tfPrimerPalabra;
+    public javax.swing.JTextField tfSegundaPalabra;
     // End of variables declaration//GEN-END:variables
 }

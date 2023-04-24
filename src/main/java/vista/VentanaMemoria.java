@@ -29,17 +29,17 @@ public class VentanaMemoria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        lbEtapa = new javax.swing.JLabel();
+        btnMonitor1 = new javax.swing.JButton();
+        btnMonitor2 = new javax.swing.JButton();
+        btnMonitor4 = new javax.swing.JButton();
+        btnMonitor3 = new javax.swing.JButton();
+        lbResultado = new javax.swing.JLabel();
+        btnReset = new javax.swing.JButton();
+        tfPosicion = new javax.swing.JTextField();
+        tfEtiqueta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btnOkey = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,33 +52,33 @@ public class VentanaMemoria extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Etiqueta:");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ETAPA");
+        lbEtapa.setForeground(new java.awt.Color(255, 255, 255));
+        lbEtapa.setText("ETAPA 1");
 
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("MONITOR 1");
+        btnMonitor1.setForeground(new java.awt.Color(0, 0, 0));
+        btnMonitor1.setText("MONITOR 1");
 
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("MONITOR 2");
+        btnMonitor2.setForeground(new java.awt.Color(0, 0, 0));
+        btnMonitor2.setText("MONITOR 2");
 
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("MONITOR 3");
+        btnMonitor4.setForeground(new java.awt.Color(0, 0, 0));
+        btnMonitor4.setText("MONITOR 4");
 
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("MONITOR 4");
+        btnMonitor3.setForeground(new java.awt.Color(0, 0, 0));
+        btnMonitor3.setText("MONITOR 3");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("RESULTADO:");
+        lbResultado.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lbResultado.setForeground(new java.awt.Color(255, 255, 255));
+        lbResultado.setText("RESULTADO:");
 
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("RESET");
+        btnReset.setForeground(new java.awt.Color(0, 0, 0));
+        btnReset.setText("RESET");
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Posicion:");
 
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jButton6.setText("OKEY");
+        btnOkey.setForeground(new java.awt.Color(0, 0, 0));
+        btnOkey.setText("OKEY");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,30 +87,30 @@ public class VentanaMemoria extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(lbResultado)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
+                            .addComponent(lbEtapa)
                             .addComponent(jLabel1))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnMonitor1)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnMonitor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton4)
+                                    .addComponent(btnMonitor3)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfPosicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnMonitor4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(tfEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnOkey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,28 +120,28 @@ public class VentanaMemoria extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jLabel2))
+                    .addComponent(btnReset)
+                    .addComponent(lbEtapa))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnMonitor1)
+                    .addComponent(btnMonitor2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(btnMonitor3)
+                    .addComponent(btnMonitor4))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(lbResultado)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(btnOkey)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -195,19 +195,19 @@ public class VentanaMemoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    public javax.swing.JButton btnMonitor1;
+    public javax.swing.JButton btnMonitor2;
+    public javax.swing.JButton btnMonitor3;
+    public javax.swing.JButton btnMonitor4;
+    public javax.swing.JButton btnOkey;
+    public javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    public javax.swing.JLabel lbEtapa;
+    public javax.swing.JLabel lbResultado;
+    public javax.swing.JTextField tfEtiqueta;
+    public javax.swing.JTextField tfPosicion;
     // End of variables declaration//GEN-END:variables
 }

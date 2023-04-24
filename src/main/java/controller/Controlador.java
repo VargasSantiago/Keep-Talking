@@ -1,9 +1,12 @@
 
 package controller;
 
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import vista.VentanaPrincipal;
@@ -48,7 +51,12 @@ public class Controlador implements ActionListener {
     private ArrayList<String> tecladoCombinacion6 = new ArrayList<String>();
     private String[][] matrizFrecuencias;
     private String[][] matrizCodigoMorse;
-    
+    private String[][] matrizPalabrasQuienVaPrimero;
+    private int etapa;
+    private String[] etiqueta;
+    private String[] posicion;
+    Map<String, String> mapaPalabrasQuienVaPrimero;
+            
     //Constructor
     public Controlador(VentanaPrincipal viewPrincipal, VentanaCables viewCables, VentanaContraseña viewContraseña, VentanaButton viewButton, VentanaCablesComplicados viewCablesComplicados, VentanaCodigoMorse viewCodigoMorse, VentanaLaberinto viewLaberinto, VentanaMemoria viewMemoria, VentanaPerilla viewPerilla, VentanaQuienVaPrimero viewQuienVaPrimero, VentanaSecuenciaDeCables viewSecuenciaDeCables, VentanaSimonDice viewSimonDice, VentanaTeclado viewTeclado) {
         this.viewPrincipal = viewPrincipal;
@@ -81,6 +89,14 @@ public class Controlador implements ActionListener {
         this.viewContraseña.jButton1.addActionListener(this);
         this.viewTeclado.btnOrdenar.addActionListener(this);
         this.viewCodigoMorse.btnConvertir.addActionListener(this);
+        this.viewMemoria.btnReset.addActionListener(this);
+        this.viewMemoria.btnOkey.addActionListener(this);
+        this.viewMemoria.btnMonitor1.addActionListener(this);
+        this.viewMemoria.btnMonitor2.addActionListener(this);
+        this.viewMemoria.btnMonitor3.addActionListener(this);
+        this.viewMemoria.btnMonitor4.addActionListener(this);
+        this.viewQuienVaPrimero.btnBuscarPrimerPalabra.addActionListener(this);
+        this.viewQuienVaPrimero.btnBuscarSegundaPalabra.addActionListener(this);
     }
 
     //Metodo que inicia la vista. 
@@ -224,6 +240,71 @@ public class Controlador implements ActionListener {
             {"ratas", "3.595 MHz"},
             {"trenes", "3.600 MHz"}
         };
+        
+        matrizPalabrasQuienVaPrimero = new String[][]{
+            {"próxima", "Medio izquierda"},
+            {"voy", "Arriba derecha"},
+            {"primero", "Abajo derecha"},
+            {"haya", "Arriba derecha"},
+            {"vaya", "Abajo derecha"},
+            {"va", "Medio izquierda"},
+            {"espera", "Abajo izquierda"},
+            {"rápido", "Medio derecha"},
+            {"monitor", "Abajo derecha"},
+            {"última", "Medio izquierda"},
+            {"sí", "Abajo derecha"},
+            {"dale", "Medio derecha"},
+            {"hay", "Medio derecha"},
+            {"otra", "Abajo izquierda"},
+            {"bien", "Abajo izquierda"},
+            {"palabra", "Abajo derecha"},
+            {"nada", "Medio derecha"},
+            {"baya", "Abajo derecha"},
+            {"listo", "Medio derecha"},
+            {"okay", "Medio derecha"},
+            {"bueno", "Arriba izquierda"},
+            {"no", "Abajo derecha"},
+            {"allá", "Abajo izquierda"},
+            {"explotó", "Medio derecha"},
+            {"ahí", "Medio izquierda"},
+            {"halla", "Abajo derecha"},
+            {"valla", "Arriba derecha"},
+            {"otro", "Abajo derecha"}
+        };
+
+        mapaPalabrasQuienVaPrimero = new HashMap<>();
+        mapaPalabrasQuienVaPrimero.put("espera", "LISTO, VA, ¿ÉSTA?, VALE, NO ESTÁ, ¿ESA?, OKAY, OTRO, ESPERA, NO, ¿QUÉ?, ESTA, ¿CÓMO?, NO ES");
+        mapaPalabrasQuienVaPrimero.put("¿qué?", "NO ESTÁ, VA, LISTO, VALE, NO, OKAY, ¿CÓMO?, ESTA, NO ES, ESPERA, OTRO, ¿ÉSTA?, ¿ESA?, ¿QUÉ?");
+        mapaPalabrasQuienVaPrimero.put("no", "OTRO, ESTA, NO ES, ¿QUÉ?, ¿ÉSTA?, ESPERA, OKAY, LISTO, ¿CÓMO?, NO ESTÁ, ¿ESA?, VA, NO, VALE");
+        mapaPalabrasQuienVaPrimero.put("otro", "NO ES, OKAY, VA, VALE, OTRO, ¿ESA?, ESPERA, ¿CÓMO?, NO, ¿ÉSTA?, NO ESTÁ, ESTA, LISTO, ¿QUÉ?");
+        mapaPalabrasQuienVaPrimero.put("¿cómo?", "ESTA, OKAY, VA, VALE, LISTO, OTRO, NO, ¿ESA?, NO ESTÁ, ¿ÉSTA?, NO ES, ¿QUÉ?, ¿CÓMO?, ESPERA");
+        mapaPalabrasQuienVaPrimero.put("listo", "VA, OKAY, ESTA, VALE, ¿QUÉ?, ¿ÉSTA?, ¿ESA?, ESPERA, ¿CÓMO?, LISTO, NO ESTÁ, OTRO, NO, NO ES");
+        mapaPalabrasQuienVaPrimero.put("¿ésta?", "ESTA, ¿ÉSTA?, NO ESTÁ, ¿CÓMO?, ESPERA, OTRO, VALE, NO, VA, ¿QUÉ?, NO ES, LISTO, ¿ESA?, OKAY");
+        mapaPalabrasQuienVaPrimero.put("esta", "ESPERA, ¿CÓMO?, NO ESTÁ, ¿ÉSTA?, VA, LISTO, OKAY, NO, ¿ESA?, OTRO, ESTA, VALE, NO ES, ¿QUÉ?");
+        mapaPalabrasQuienVaPrimero.put("no está", "OKAY, NO ESTÁ, ¿QUÉ?, NO, VALE, LISTO, OTRO, ¿ÉSTA?, ESTA, NO ES, ¿ESA?, ESPERA, VA, ¿CÓMO?");
+        mapaPalabrasQuienVaPrimero.put("okay", "LISTO, ¿CÓMO?, ESPERA, ¿ESA?, NO, NO ES, ¿ÉSTA?, OKAY, VALE, NO ESTÁ, ESTA, OTRO, VA, ¿QUÉ?");
+        mapaPalabrasQuienVaPrimero.put("vale", "OTRO, ESPERA, VA, ¿ÉSTA?, ¿CÓMO?, ¿ESA?, NO, NO ES, NO ESTÁ, VALE, OKAY, ¿QUÉ?, ESTA, LISTO");
+        mapaPalabrasQuienVaPrimero.put("va", "VALE, NO, ¿QUÉ?, LISTO, ESTA, ¿CÓMO?, NO ES, VA, NO ESTÁ, ESPERA, OTRO, ¿ESA?, ¿ÉSTA?, OKAY");
+        mapaPalabrasQuienVaPrimero.put("no es", "ESTA, NO, OTRO, VA, LISTO, NO ESTÁ, ¿QUÉ?, ¿ESA?, ¿ÉSTA?, NO ES, ¿CÓMO?, ESPERA, OKAY, VALE");
+        mapaPalabrasQuienVaPrimero.put("¿esa?", "OKAY, VALE, LISTO, ESPERA, ¿ESA?, VA, ¿CÓMO?, ESTA, OTRO, NO ESTÁ, ¿QUÉ?, ¿ÉSTA?, NO, NO ES");
+        mapaPalabrasQuienVaPrimero.put("ok", "DALE, ¿DÓNDE?, BUENO, ÉSTA, BIEN, RÁPIDO, ESTÁ, YA ESTÁ, SÍ, OK, ¿CUÁL?, ¿SEGURO?, OTRA, NO SÉ");
+        mapaPalabrasQuienVaPrimero.put("¿dónde?", "BUENO, BIEN, ¿SEGURO?, RÁPIDO, SÍ, OTRA, ¿CUÁL?, YA ESTÁ, OK, NO SÉ, ÉSTA, DALE, ESTÁ, ¿DÓNDE?");
+        mapaPalabrasQuienVaPrimero.put("bueno", "¿CUÁL?, ¿DÓNDE?, RÁPIDO, BUENO, BIEN, ESTÁ, DALE, NO SÉ, ÉSTA, OK, SÍ, YA ESTÁ, ¿SEGURO?, OTRA");
+        mapaPalabrasQuienVaPrimero.put("ésta", "OK, ÉSTA, ESTÁ, BIEN, ¿CUÁL?, ¿DÓNDE?, NO SÉ, BUENO, SÍ, RÁPIDO, DALE, OTRA, ¿SEGURO?, YA ESTÁ");
+        mapaPalabrasQuienVaPrimero.put("está", "OTRA, NO SÉ, ESTÁ, RÁPIDO, SÍ, DALE, BUENO, YA ESTÁ, ÉSTA, ¿SEGURO?, BIEN, ¿CUÁL?, ¿DÓNDE?, OK");
+        mapaPalabrasQuienVaPrimero.put("no sé", "RÁPIDO, DALE, BIEN, SÍ, ÉSTA, ESTÁ, ¿CUÁL?, OTRA, NO SÉ, OK, ¿SEGURO?, YA ESTÁ, ¿DÓNDE?, BUENO");
+        mapaPalabrasQuienVaPrimero.put("rápido", "RÁPIDO, BUENO, ¿DÓNDE?, OK, OTRA, YA ESTÁ, ¿CUÁL?, BIEN, DALE, ¿SEGURO?, ÉSTA, ESTÁ, NO SÉ, SÍ");
+        mapaPalabrasQuienVaPrimero.put("¿cuál?", "ESTÁ, NO SÉ, ¿DÓNDE?, ÉSTA, BIEN, ¿CUÁL?, OTRA, OK, RÁPIDO, ¿SEGURO?, BUENO, DALE, YA ESTÁ, SÍ");
+        mapaPalabrasQuienVaPrimero.put("sí", "OK, YA ESTÁ, ÉSTA, BUENO, NO SÉ, OTRA, ¿CUÁL?, ¿SEGURO?, ¿DÓNDE?, RÁPIDO, ESTÁ, BIEN, SÍ, DALE");
+        mapaPalabrasQuienVaPrimero.put("otra", "DALE, RÁPIDO, BIEN, SÍ, BUENO, ESTÁ, ÉSTA, YA ESTÁ, ¿SEGURO?, OK, NO SÉ, ¿DÓNDE?, ¿CUÁL?, OTRA");
+        mapaPalabrasQuienVaPrimero.put("bien", "SÍ, RÁPIDO, ¿CUÁL?, BUENO, YA ESTÁ, DALE, BIEN, ¿SEGURO?, OTRA, ¿DÓNDE?, ESTÁ, ÉSTA, NO SÉ, OK");
+        mapaPalabrasQuienVaPrimero.put("ya está", "¿DÓNDE?, NO SÉ, OTRA, ¿CUÁL?, OK, ESTÁ, DALE, SÍ, ÉSTA, BIEN, YA ESTÁ, RÁPIDO, BUENO, ¿SEGURO?");
+        mapaPalabrasQuienVaPrimero.put("dale", "¿DÓNDE?, OTRA, ¿SEGURO?, ÉSTA, OK, YA ESTÁ, RÁPIDO, ESTÁ, DALE, NO SÉ, SÍ, BIEN, BUENO, ¿CUÁL?");
+        mapaPalabrasQuienVaPrimero.put("¿seguro?", "ÉSTA, BIEN, NO SÉ, ESTÁ, YA ESTÁ, OTRA, ¿CUÁL?, SÍ, RÁPIDO, OK, ¿SEGURO?, DALE, ¿DÓNDE?, BUENO");
+        
+        etapa = 1;
+        etiqueta = new String[5];
+        posicion = new String[5];
     }
     
     //Función que realizan los botones. 
@@ -587,6 +668,149 @@ public class Controlador implements ActionListener {
 
             } catch (Exception x) {
                 showMessageDialog(null, "Error: " + x.getMessage());
+            }
+        }
+        
+        if (e.getSource() == viewMemoria.btnOkey) {
+            
+            try {
+                if (etapa == 4) {
+                    if (viewMemoria.tfEtiqueta.getText().matches("[1-4]+")) {
+                        etiqueta[3] = viewMemoria.tfEtiqueta.getText();
+                        if (viewMemoria.tfPosicion.getText().matches("[1-4]+")) {
+                            posicion[3] = viewMemoria.tfPosicion.getText();
+                            etapa = 5;
+                            viewMemoria.lbEtapa.setText("ETAPA 5");
+                        } else {
+                            showMessageDialog(null, "La Posicion no contiene solo números del 1 al 4");
+                        }
+                    } else {
+                        showMessageDialog(null, "La Etiqueta no contiene solo números del 1 al 4");
+                    }
+                } 
+                
+                if (etapa == 3) {
+                    if (viewMemoria.tfEtiqueta.getText().matches("[1-4]+")) {
+                        etiqueta[2] = viewMemoria.tfEtiqueta.getText();
+                        if (viewMemoria.tfPosicion.getText().matches("[1-4]+")) {
+                            posicion[2] = viewMemoria.tfPosicion.getText();
+                            etapa = 4;
+                            viewMemoria.lbEtapa.setText("ETAPA 4");
+                        } else {
+                            showMessageDialog(null, "La Posicion no contiene solo números del 1 al 4");
+                        }
+                    } else {
+                        showMessageDialog(null, "La Etiqueta no contiene solo números del 1 al 4");
+                    }
+                }
+                
+                if (etapa == 2) {
+                    if (viewMemoria.tfEtiqueta.getText().matches("[1-4]+")) {
+                        etiqueta[1] = viewMemoria.tfEtiqueta.getText();
+                        if (viewMemoria.tfPosicion.getText().matches("[1-4]+")) {
+                            posicion[1] = viewMemoria.tfPosicion.getText();
+                            etapa = 3;
+                            viewMemoria.lbEtapa.setText("ETAPA 3");
+                        } else {
+                            showMessageDialog(null, "La Posicion no contiene solo números del 1 al 4");
+                        }
+                    } else {
+                        showMessageDialog(null, "La Etiqueta no contiene solo números del 1 al 4");
+                    }
+                }
+                
+                if (etapa == 1) {
+                    if (viewMemoria.tfEtiqueta.getText().matches("[1-4]+")) {
+                        etiqueta[0] = viewMemoria.tfEtiqueta.getText();
+                        if (viewMemoria.tfPosicion.getText().matches("[1-4]+")) {
+                            posicion[0] = viewMemoria.tfPosicion.getText();
+                            etapa = 2;
+                            viewMemoria.lbEtapa.setText("ETAPA 2");
+                        } else {
+                            showMessageDialog(null, "La Posicion no contiene solo números del 1 al 4");
+                        }
+                    } else {
+                        showMessageDialog(null, "La Etiqueta no contiene solo números del 1 al 4");
+                    }
+                }              
+            } catch (Exception x) {
+                showMessageDialog(null, "Error: " + x.getMessage());
+            }
+        }
+        
+        if (e.getSource() == viewMemoria.btnReset) {
+            this.etapa = 1;
+            viewMemoria.lbEtapa.setText("ETAPA 1");
+        }
+        
+        if (e.getSource() == viewMemoria.btnMonitor1) {
+            if (etapa == 1) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 2"); }
+            if (etapa == 2) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA 4"); }
+            if (etapa == 3) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[1]); }
+            if (etapa == 4) { viewMemoria.lbResultado.setText("RESULTADO: POSICION " + posicion[0]); }
+            if (etapa == 5) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[0]); }    
+        }
+        
+        if (e.getSource() == viewMemoria.btnMonitor2) {
+            if (etapa == 1) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 2"); }
+            if (etapa == 2) { viewMemoria.lbResultado.setText("RESULTADO: POSICION " + posicion[0]); }
+            if (etapa == 3) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[0]); }
+            if (etapa == 4) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 1"); }
+            if (etapa == 5) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[1]); }    
+        }
+        
+        if (e.getSource() == viewMemoria.btnMonitor3) {
+            if (etapa == 1) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 3"); }
+            if (etapa == 2) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 1"); }
+            if (etapa == 3) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 3"); }
+            if (etapa == 4) { viewMemoria.lbResultado.setText("RESULTADO: POSICION " + posicion[1]); }
+            if (etapa == 5) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[3]); }    
+        }
+        
+        if (e.getSource() == viewMemoria.btnMonitor4) {
+            if (etapa == 1) { viewMemoria.lbResultado.setText("RESULTADO: POSICION 4"); }
+            if (etapa == 2) { viewMemoria.lbResultado.setText("RESULTADO: POSICION " + posicion[0]); }
+            if (etapa == 3) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA 4"); }
+            if (etapa == 4) { viewMemoria.lbResultado.setText("RESULTADO: POSICION " + posicion[1]); }
+            if (etapa == 5) { viewMemoria.lbResultado.setText("RESULTADO: ETIQUETA " + etiqueta[2]); }    
+        }
+        
+        if (e.getSource() == viewQuienVaPrimero.btnBuscarPrimerPalabra) {
+            
+            String primerPalabra = "";
+            String resultado = "";
+            
+            try {
+                primerPalabra = viewQuienVaPrimero.tfPrimerPalabra.getText();
+                
+                for (int i = 0; i < matrizPalabrasQuienVaPrimero.length; i++) {
+                    if (matrizPalabrasQuienVaPrimero[i][0].equals(primerPalabra)) {
+                        resultado = matrizPalabrasQuienVaPrimero[i][1];
+                        break; // Si encontramos la palabra, salimos del bucle
+                    }
+                }
+                
+                if (!resultado.equals("")) {
+                    viewQuienVaPrimero.lbResultadoPrimerPalabra.setText("RESULTADO: " + resultado);
+                } else {
+                    viewQuienVaPrimero.lbResultadoPrimerPalabra.setText("RESULTADO: NO SE ENCONTRO LA PALABRA");
+                }
+            } catch (Exception x) {
+                showMessageDialog(null, "Error: " + x.getMessage());
+            }
+            
+        }
+        
+        if (e.getSource() == viewQuienVaPrimero.btnBuscarSegundaPalabra) {
+            
+            String segundaPalabra = "";
+            
+            try {
+                segundaPalabra = viewQuienVaPrimero.tfSegundaPalabra.getText();
+                viewQuienVaPrimero.taResultadoSegundaPalabra.setText(mapaPalabrasQuienVaPrimero.get(segundaPalabra));
+                if (mapaPalabrasQuienVaPrimero.get(segundaPalabra).equals(null)) { }
+            } catch (Exception x) {
+                viewQuienVaPrimero.taResultadoSegundaPalabra.setText("NO SE ENCONTRO LA PALABRA");
             }
         }
     }    

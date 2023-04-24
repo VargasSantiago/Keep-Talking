@@ -58,21 +58,21 @@
                                   <Component id="btnMonitor1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnReset" max="32767" attributes="0"/>
                                       <Component id="btnMonitor2" max="32767" attributes="0"/>
-                                      <Component id="btnReset" min="-2" pref="77" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="btnMonitor3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnMonitor3" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="tfPosicion" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="tfPosicion" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btnMonitor4" max="32767" attributes="0"/>
                                       <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="tfEtiqueta" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="tfEtiqueta" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="btnOkey" alignment="0" max="32767" attributes="0"/>

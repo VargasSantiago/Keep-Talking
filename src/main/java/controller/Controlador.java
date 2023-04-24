@@ -55,7 +55,8 @@ public class Controlador implements ActionListener {
     private int etapa;
     private String[] etiqueta;
     private String[] posicion;
-    Map<String, String> mapaPalabrasQuienVaPrimero;
+    private String resultadoSimonDice;
+    private Map<String, String> mapaPalabrasQuienVaPrimero;
             
     //Constructor
     public Controlador(VentanaPrincipal viewPrincipal, VentanaCables viewCables, VentanaContraseña viewContraseña, VentanaButton viewButton, VentanaCablesComplicados viewCablesComplicados, VentanaCodigoMorse viewCodigoMorse, VentanaLaberinto viewLaberinto, VentanaMemoria viewMemoria, VentanaPerilla viewPerilla, VentanaQuienVaPrimero viewQuienVaPrimero, VentanaSecuenciaDeCables viewSecuenciaDeCables, VentanaSimonDice viewSimonDice, VentanaTeclado viewTeclado) {
@@ -97,6 +98,12 @@ public class Controlador implements ActionListener {
         this.viewMemoria.btnMonitor4.addActionListener(this);
         this.viewQuienVaPrimero.btnBuscarPrimerPalabra.addActionListener(this);
         this.viewQuienVaPrimero.btnBuscarSegundaPalabra.addActionListener(this);
+        this.viewSimonDice.btnReset.addActionListener(this);
+        this.viewSimonDice.btnAzul.addActionListener(this);
+        this.viewSimonDice.btnAmarillo.addActionListener(this);
+        this.viewSimonDice.btnRojo.addActionListener(this);
+        this.viewSimonDice.btnVerde.addActionListener(this);
+        this.viewCablesComplicados.btnBuscar.addActionListener(this);
     }
 
     //Metodo que inicia la vista. 
@@ -305,6 +312,8 @@ public class Controlador implements ActionListener {
         etapa = 1;
         etiqueta = new String[5];
         posicion = new String[5];
+        
+        resultadoSimonDice = "";
     }
     
     //Función que realizan los botones. 
@@ -811,6 +820,180 @@ public class Controlador implements ActionListener {
                 if (mapaPalabrasQuienVaPrimero.get(segundaPalabra).equals(null)) { }
             } catch (Exception x) {
                 viewQuienVaPrimero.taResultadoSegundaPalabra.setText("NO SE ENCONTRO LA PALABRA");
+            }
+        }
+        
+        if (e.getSource() == viewSimonDice.btnRojo) {
+            
+            if (viewSimonDice.cbConVocal.isSelected()) {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Azul ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Amarillo ";
+                    } else {
+                        resultadoSimonDice += "Verde ";
+                    }
+                }
+            } else {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Azul ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Rojo ";
+                    } else {
+                        resultadoSimonDice += "Amarillo ";
+                    }
+                }
+            }
+            
+            viewSimonDice.taResultado.setText(resultadoSimonDice);
+        }
+        
+        if (e.getSource() == viewSimonDice.btnAzul) {
+            if (viewSimonDice.cbConVocal.isSelected()) {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Rojo ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Verde ";
+                    } else {
+                        resultadoSimonDice += "Rojo ";
+                    }
+                }
+            } else {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Amarillo ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Azul ";
+                    } else {
+                        resultadoSimonDice += "Verde ";
+                    }
+                }
+            }
+            
+            viewSimonDice.taResultado.setText(resultadoSimonDice);
+        }
+        
+        if (e.getSource() == viewSimonDice.btnAmarillo) {
+            if (viewSimonDice.cbConVocal.isSelected()) {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Verde ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Rojo ";
+                    } else {
+                        resultadoSimonDice += "Azul ";
+                    }
+                }
+            } else {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Rojo ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Verde ";
+                    } else {
+                        resultadoSimonDice += "Rojo ";
+                    }
+                }
+            }
+            
+            viewSimonDice.taResultado.setText(resultadoSimonDice);
+        }
+        
+        if (e.getSource() == viewSimonDice.btnVerde) {
+            if (viewSimonDice.cbConVocal.isSelected()) {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Amarillo ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Azul ";
+                    } else {
+                        resultadoSimonDice += "Amarillo ";
+                    }
+                }
+            } else {
+                if (viewSimonDice.rbSinFallos.isSelected()) {
+                    resultadoSimonDice += "Verde ";
+                } else {
+                    if (viewSimonDice.rb1Fallo.isSelected()) {
+                        resultadoSimonDice += "Amarillo ";
+                    } else {
+                        resultadoSimonDice += "Azul ";
+                    }
+                }
+            }
+            
+            viewSimonDice.taResultado.setText(resultadoSimonDice);
+        }
+        
+        if (e.getSource() == viewSimonDice.btnReset) {
+            resultadoSimonDice = "";
+            viewSimonDice.taResultado.setText("");
+        }
+        
+        if (e.getSource() == viewCablesComplicados.btnBuscar) {
+            if (viewCablesComplicados.cbRojo.isSelected()) {
+                if (viewCablesComplicados.cbAzul.isSelected()) {
+                    if (viewCablesComplicados.cbEstrella.isSelected()) {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("No cortes el cable");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Hay un puerto paralelo");
+                        }
+                    } else {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Ultimo digito del serial es par");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Ultimo digito del serial es par");
+                        }
+                    }
+                } else {
+                    if (viewCablesComplicados.cbEstrella.isSelected()) {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Dos o más baterias");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Corta el cable");
+                        }
+                    } else {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Dos o más baterias");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Ultimo digito del serial es par");
+                        }
+                    }
+                }
+            } else {
+                if (viewCablesComplicados.cbAzul.isSelected()) {
+                    if (viewCablesComplicados.cbEstrella.isSelected()) {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Hay un puerto paralelo");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("No cortes el cable");
+                        }
+                    } else {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Hay un puerto paralelo");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Ultimo digito del serial es par");
+                        }
+                    }
+                } else {
+                    if (viewCablesComplicados.cbEstrella.isSelected()) {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("Dos o más baterias");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Corta el cable");
+                        }
+                    } else {
+                        if (viewCablesComplicados.cbLed.isSelected()) {
+                            viewCablesComplicados.taRespuesta.setText("No cortes el cable");
+                        } else {
+                            viewCablesComplicados.taRespuesta.setText("Corta el cable");
+                        }
+                    }
+                }
             }
         }
     }    

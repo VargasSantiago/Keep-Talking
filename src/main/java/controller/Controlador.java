@@ -1,12 +1,14 @@
 
 package controller;
 
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import vista.VentanaPrincipal;
@@ -22,6 +24,8 @@ import vista.VentanaQuienVaPrimero;
 import vista.VentanaSecuenciaDeCables;
 import vista.VentanaSimonDice;
 import vista.VentanaTeclado;
+
+import model.Mapa;
 
 public class Controlador implements ActionListener {
     
@@ -57,7 +61,19 @@ public class Controlador implements ActionListener {
     private String[] posicion;
     private String resultadoSimonDice;
     private Map<String, String> mapaPalabrasQuienVaPrimero;
+    private Mapa[] mapas = {
+                new Mapa(1, 2, 6, 3, "mapa1"),
+                new Mapa(5, 2, 2, 4, "mapa2"),
+                new Mapa(4, 4, 6, 4, "mapa3"),
+                new Mapa(1, 1, 1, 4, "mapa4"),
+                new Mapa(5, 3, 4, 6, "mapa5"),
+                new Mapa(5, 1, 3, 5, "mapa6"),
+                new Mapa(2, 1, 2, 6, "mapa7"),
+                new Mapa(4, 1, 3, 4, "mapa8"),
+                new Mapa(3, 2, 1, 5, "mapa9")
+        };
             
+    
     //Constructor
     public Controlador(VentanaPrincipal viewPrincipal, VentanaCables viewCables, VentanaContraseña viewContraseña, VentanaButton viewButton, VentanaCablesComplicados viewCablesComplicados, VentanaCodigoMorse viewCodigoMorse, VentanaLaberinto viewLaberinto, VentanaMemoria viewMemoria, VentanaPerilla viewPerilla, VentanaQuienVaPrimero viewQuienVaPrimero, VentanaSecuenciaDeCables viewSecuenciaDeCables, VentanaSimonDice viewSimonDice, VentanaTeclado viewTeclado) {
         this.viewPrincipal = viewPrincipal;
@@ -104,11 +120,12 @@ public class Controlador implements ActionListener {
         this.viewSimonDice.btnRojo.addActionListener(this);
         this.viewSimonDice.btnVerde.addActionListener(this);
         this.viewCablesComplicados.btnBuscar.addActionListener(this);
+        this.viewLaberinto.btnBuscar.addActionListener(this);
     }
 
     //Metodo que inicia la vista. 
     public void iniciar() {
-
+                                        
         viewPrincipal.setTitle("MANUAL BOMBITAS");
         viewPrincipal.setLocationRelativeTo(null);
 
@@ -308,7 +325,7 @@ public class Controlador implements ActionListener {
         mapaPalabrasQuienVaPrimero.put("ya está", "¿DÓNDE?, NO SÉ, OTRA, ¿CUÁL?, OK, ESTÁ, DALE, SÍ, ÉSTA, BIEN, YA ESTÁ, RÁPIDO, BUENO, ¿SEGURO?");
         mapaPalabrasQuienVaPrimero.put("dale", "¿DÓNDE?, OTRA, ¿SEGURO?, ÉSTA, OK, YA ESTÁ, RÁPIDO, ESTÁ, DALE, NO SÉ, SÍ, BIEN, BUENO, ¿CUÁL?");
         mapaPalabrasQuienVaPrimero.put("¿seguro?", "ÉSTA, BIEN, NO SÉ, ESTÁ, YA ESTÁ, OTRA, ¿CUÁL?, SÍ, RÁPIDO, OK, ¿SEGURO?, DALE, ¿DÓNDE?, BUENO");
-        
+   
         etapa = 1;
         etiqueta = new String[5];
         posicion = new String[5];
@@ -994,6 +1011,40 @@ public class Controlador implements ActionListener {
                         }
                     }
                 }
+            }
+        }
+        
+        if (e.getSource() == viewLaberinto.btnBuscar) {
+            
+            try {
+                if (viewLaberinto.tfX1.getText().matches("[1-6]+")) {
+                    if (viewLaberinto.tfY1.getText().matches("[1-6]+")) {
+                        if (viewLaberinto.tfX2.getText().matches("[1-6]+")) {
+                            if (viewLaberinto.tfY2.getText().matches("[1-6]+")) {
+                                int x1 = Integer.parseInt(viewLaberinto.tfX1.getText());
+                                int y1 = Integer.parseInt(viewLaberinto.tfY1.getText());
+                                int x2 = Integer.parseInt(viewLaberinto.tfX2.getText());
+                                int y2 = Integer.parseInt(viewLaberinto.tfY2.getText());
+
+                                for (int i = 0; i < mapas.length; i++) {
+                                    if (mapas[i].contienePuntos(x1, y1, x2, y2)) {
+                                        File archivoImagen = new File("src\\main\\java\\img\\" + mapas[i].getImg() + ".png");
+                                        try {
+                                            viewLaberinto.lbImg.setIcon(new javax.swing.ImageIcon(ImageIO.read(archivoImagen)));
+                                        } catch (Exception x) {
+                                            showMessageDialog(null, "Error: " + x.getMessage());
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+            } catch (Exception x) {
+                showMessageDialog(null, "Error: " + x.getMessage());
             }
         }
     }    

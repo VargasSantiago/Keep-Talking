@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 
 import vista.VentanaPrincipal;
 import vista.VentanaCables;
@@ -61,6 +62,7 @@ public class Controlador implements ActionListener {
     private String[] posicion;
     private String resultadoSimonDice;
     private Map<String, String> mapaPalabrasQuienVaPrimero;
+    DefaultTableModel modelo;
     private Mapa[] mapas = {
                 new Mapa(1, 2, 6, 3, "mapa1"),
                 new Mapa(5, 2, 2, 4, "mapa2"),
@@ -121,6 +123,8 @@ public class Controlador implements ActionListener {
         this.viewSimonDice.btnVerde.addActionListener(this);
         this.viewCablesComplicados.btnBuscar.addActionListener(this);
         this.viewLaberinto.btnBuscar.addActionListener(this);
+        this.viewSecuenciaDeCables.btnBuscar.addActionListener(this);
+        this.viewSecuenciaDeCables.btnReset.addActionListener(this);
     }
 
     //Metodo que inicia la vista. 
@@ -331,6 +335,7 @@ public class Controlador implements ActionListener {
         posicion = new String[5];
         
         resultadoSimonDice = "";
+        modelo = (DefaultTableModel) viewSecuenciaDeCables.tabla.getModel();
     }
     
     //Función que realizan los botones. 
@@ -1046,6 +1051,87 @@ public class Controlador implements ActionListener {
             } catch (Exception x) {
                 showMessageDialog(null, "Error: " + x.getMessage());
             }
+        }
+        
+        if (e.getSource() == viewSecuenciaDeCables.btnBuscar) {
+     
+            try {
+                if (viewSecuenciaDeCables.tabla.getValueAt(0, 0).equals("c")) {
+                    viewSecuenciaDeCables.tabla.setValueAt("c ✓", 0, 0);
+                } else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(0, 0) + " X", 0, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(1, 0).equals("b")) {
+                    viewSecuenciaDeCables.tabla.setValueAt("b ✓", 1, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(1, 0) + " X", 1, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(2, 0).equals("a")) {
+                    viewSecuenciaDeCables.tabla.setValueAt("a ✓", 2, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(2, 0) + " X", 2, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(3, 0).equals("a") || viewSecuenciaDeCables.tabla.getValueAt(3, 0).equals("c")) {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(3, 0) + " ✓", 3, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(3, 0) + " X", 3, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(4, 0).equals("b")) {
+                    viewSecuenciaDeCables.tabla.setValueAt("b ✓", 4, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(4, 0) + " X", 4, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(5, 0).equals("a") || viewSecuenciaDeCables.tabla.getValueAt(5, 0).equals("c")) {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(5, 0) + " ✓", 5, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(5, 0) + " X", 5, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(6, 0).equals("a") || viewSecuenciaDeCables.tabla.getValueAt(6, 0).equals("b") || viewSecuenciaDeCables.tabla.getValueAt(6, 0).equals("c")) {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(6, 0) + " ✓", 6, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(6, 0) + " X", 6, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(7, 0).equals("a") || viewSecuenciaDeCables.tabla.getValueAt(7, 0).equals("b")) {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(7, 0) + " ✓", 7, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(7, 0) + " X", 7, 0);
+                }
+                if (viewSecuenciaDeCables.tabla.getValueAt(8, 0).equals("b")) {
+                    viewSecuenciaDeCables.tabla.setValueAt("b ✓", 8, 0);
+                }else {
+                    viewSecuenciaDeCables.tabla.setValueAt(viewSecuenciaDeCables.tabla.getValueAt(8, 0) + " X", 8, 0);
+                }
+                
+                
+            }catch (Exception x) {
+                showMessageDialog(null, "Error: " + x.getMessage());
+            }
+            
+
+        }
+        
+        if (e.getSource() == viewSecuenciaDeCables.btnReset) {
+            modelo.setRowCount(0);
+            
+            Object[] fila1 = {"", "", ""};
+            Object[] fila2 = {"", "", ""};
+            Object[] fila3 = {"", "", ""};
+            Object[] fila4 = {"", "", ""};
+            Object[] fila5 = {"", "", ""};
+            Object[] fila6 = {"", "", ""};
+            Object[] fila7 = {"", "", ""};
+            Object[] fila8 = {"", "", ""};
+            Object[] fila9 = {"", "", ""};
+            
+            modelo.addRow(fila1);
+            modelo.addRow(fila2);
+            modelo.addRow(fila3);
+            modelo.addRow(fila4);
+            modelo.addRow(fila5);
+            modelo.addRow(fila6);
+            modelo.addRow(fila7);
+            modelo.addRow(fila8);
+            modelo.addRow(fila9);
         }
     }    
 }
